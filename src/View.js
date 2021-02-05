@@ -75,7 +75,7 @@ const BadResult = styled(GoodResult)`
   border: 3px solid red;
 `;
 
-export default function AppView({onCheck, catInFoto, loading}) {
+export default function AppView({onCheck, catInFoto, loading, test}) {
   const [state, setState] = React.useState({
     foto: undefined
   });
@@ -110,6 +110,11 @@ export default function AppView({onCheck, catInFoto, loading}) {
                 )
               }
             </ButtonWraper>
+            {
+              // test !== ''
+              // ? JSON.stringify(test)
+              // : null
+            }
           </ React.Fragment>
         : <React.Fragment>
             <Camera

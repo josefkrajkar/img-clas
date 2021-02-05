@@ -19,7 +19,8 @@ function App() {
   const [state, setState] = React.useState({
     net: undefined,
     catInFoto: undefined,
-    loading: true
+    loading: true,
+    test: ''
   });
 
   React.useEffect(() => {
@@ -37,6 +38,7 @@ function App() {
     <Wrapper>
       <AppHeader />
       <View
+        test={state.test}
         loading={state.loading}
         catInFoto={state.catInFoto}
         onCheck={() => {
@@ -45,11 +47,11 @@ function App() {
             state.net.classify(el)
               .then(result => {
                 console.log(result);
-                const fotoWithCat = result.find(item => item.className.includes('cat') && item.probability > 0.5);
+                const fotoWithCat = result.find(item => (item.className.includes('cat') || item.className.includes('pussy')));
                 if (fotoWithCat) {
-                  setState({...state, catInFoto: true});
+                  setState({...state, catInFoto: true, test: result});
                 } else {
-                  setState({...state, catInFoto: false});
+                  setState({...state, catInFoto: false, test: result});
                 }
               })
               .catch(err => {
