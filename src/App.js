@@ -41,6 +41,7 @@ function App() {
         test={state.test}
         loading={state.loading}
         catInFoto={state.catInFoto}
+        reset={() => setState({...state, catInFoto: undefined, test: undefined})}
         onCheck={() => {
           const el = document.getElementById('foto');
           if (el && state.net) {

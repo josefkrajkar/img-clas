@@ -41,6 +41,7 @@ const Button = styled.button`
 `;
 
 const ButtonWraper = styled.div`
+  margin-top: 5px;
   flex: 0 0 auto;
   width: calc(100vw - 40px);
   display: flex;
@@ -75,7 +76,7 @@ const BadResult = styled(GoodResult)`
   border: 3px solid red;
 `;
 
-export default function AppView({onCheck, catInFoto, loading, test}) {
+export default function AppView({onCheck, catInFoto, loading, reset}) {
   const [state, setState] = React.useState({
     foto: undefined
   });
@@ -110,11 +111,18 @@ export default function AppView({onCheck, catInFoto, loading, test}) {
                 )
               }
             </ButtonWraper>
-            {
-              // test !== ''
-              // ? JSON.stringify(test)
-              // : null
-            }
+            <ButtonWraper>
+              {
+                <Button
+                  onClick={() => {
+                    reset()
+                    setState({...state, foto: undefined})
+                  }}
+                >
+                  Zkusit znovu
+                </Button>
+              }
+            </ButtonWraper>
           </ React.Fragment>
         : <React.Fragment>
             <Camera
