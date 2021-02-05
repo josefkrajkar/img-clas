@@ -22,10 +22,10 @@ const SubTitle = styled.div`
 export default function AppHeader() {
   return <Header>
     <Title>
-      Kde je Kobliha?
+      Is there a cat?
     </Title>
     <SubTitle>
-      {/* Image classifier */}
+      Image classifier
     </SubTitle>
   </Header>
 };

@@ -9,5 +9,5 @@ const Loader = styled.h2`
 `;
 
 export default function AppLoader () {
-  return <Loader>Načítám model</Loader>
+  return <Loader>Loading model</Loader>
 };

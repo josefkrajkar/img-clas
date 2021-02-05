@@ -98,15 +98,15 @@ export default function AppView({onCheck, catInFoto, loading, reset}) {
                 ? <Button
                     onClick={() => onCheck()}
                   >
-                    Najít koblihu
+                    Search for a cat
                   </Button>
                 : (
                   catInFoto
                   ? <GoodResult>
-                      Je tam Kobliha! :)
+                      There is a cat! :)
                     </GoodResult>
                   : <BadResult>
-                      Není tam Kobliha! :(
+                      No cat in the picture :(
                     </BadResult>
                 )
               }
@@ -119,7 +119,7 @@ export default function AppView({onCheck, catInFoto, loading, reset}) {
                     setState({...state, foto: undefined})
                   }}
                 >
-                  Zkusit znovu
+                  Try again
                 </Button>
               }
             </ButtonWraper>

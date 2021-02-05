@@ -59,7 +59,7 @@ function App() {
                 console.error(err);
               });
           } else {
-            console.log('nemuzu najit fotku');
+            console.log('Cant find the foto element...');
           }
         }}
       />
