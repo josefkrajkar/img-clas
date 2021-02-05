@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import Loader from './Loader';
 
 const View = styled.div`
   background: #ffffff;
@@ -54,54 +55,89 @@ const Image = styled.img`
   height: calc(100vh - 225px);
 `;
 
-export default function AppView() {
+const GoodResult = styled.div`
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  margin: 0 20px;
+  padding: 15px;
+  color: green;
+  background: #ffffff;
+  font-weight: 600;
+  border: 3px solid green;
+  border-radius: 20px;
+  text-transform: uppercase;
+  width: 250px;
+`;
+
+const BadResult = styled(GoodResult)`
+  color: red;
+  border: 3px solid red;
+`;
+
+export default function AppView({onCheck, catInFoto, loading}) {
   const [state, setState] = React.useState({
     foto: undefined
   });
 
   return <View>
     {
-      state.foto
-      ? <React.Fragment>
-          <Image
-            alt='foto'
-            src={state.foto}
-          />
-          <ButtonWraper>
-            <Button
-              onClick={() => console.log('hledám koblihu!')}
-            >
-              Najít koblihu
-            </Button>
-          </ButtonWraper>
-        </ React.Fragment>
-      : <React.Fragment>
-          <Camera
-            src='camera.png'
-            alt='camera'
-            onClick={() => {
-              const el = document.getElementById('camera');
-              if (el) {
-                el.click();
+      loading
+      ? <Loader />
+      : state.foto
+        ? <React.Fragment>
+            <Image
+              id='foto'
+              alt='foto'
+              src={state.foto}
+            />
+            <ButtonWraper>
+              {
+                catInFoto === undefined
+                ? <Button
+                    onClick={() => onCheck()}
+                  >
+                    Najít koblihu
+                  </Button>
+                : (
+                  catInFoto
+                  ? <GoodResult>
+                      Je tam Kobliha! :)
+                    </GoodResult>
+                  : <BadResult>
+                      Není tam Kobliha! :(
+                    </BadResult>
+                )
               }
-            }}
-          />
-          <input
-            onChange={(e) => {
-              if (e.target.files[0]) {
-                setState({
-                  ...state,
-                  foto: URL.createObjectURL(e.target.files[0])
-                })
-              }
-            }}
-            hidden
-            type="file"
-            id="camera"
-            name="picture"
-            accept="image/png, image/jpeg"
-          />
-        </React.Fragment>
+            </ButtonWraper>
+          </ React.Fragment>
+        : <React.Fragment>
+            <Camera
+              src='camera.png'
+              alt='camera'
+              onClick={() => {
+                const el = document.getElementById('camera');
+                if (el) {
+                  el.click();
+                }
+              }}
+            />
+            <input
+              onChange={(e) => {
+                if (e.target.files[0]) {
+                  setState({
+                    ...state,
+                    foto: URL.createObjectURL(e.target.files[0])
+                  })
+                }
+              }}
+              hidden
+              type="file"
+              id="camera"
+              name="picture"
+              accept="image/png, image/jpeg"
+            />
+          </React.Fragment>
     }
   </View>
 };
